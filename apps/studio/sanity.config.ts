@@ -1,18 +1,14 @@
 import { assist } from "@sanity/assist";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
-import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { lucideIconPicker } from "sanity-plugin-lucide-icon-picker";
 import { media } from "sanity-plugin-media";
 
 import { Logo } from "@/components/logo";
-import { locations } from "@/location";
-import { presentationUrl } from "@/plugins/presentation-url";
 import { schemaTypes } from "@/schemaTypes/index";
 import { structure } from "@/structure";
-import { getPresentationUrl } from "@/utils/helper";
 
 const projectId = "iuzxyqcn";
 const dataset = "production";
@@ -28,21 +24,9 @@ export default defineConfig({
     enabled: true,
   },
   plugins: [
-    presentationTool({
-      resolve: {
-        locations,
-      },
-      previewUrl: {
-        origin: getPresentationUrl(),
-        previewMode: {
-          enable: "/api/presentation-draft",
-        },
-      },
-    }),
     structureTool({
       structure,
     }),
-    presentationUrl(),
     visionTool(),
     lucideIconPicker(),
     unsplashImageAsset(),
