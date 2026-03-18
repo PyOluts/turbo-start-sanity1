@@ -14,8 +14,8 @@ import { schemaTypes } from "@/schemaTypes/index";
 import { structure } from "@/structure";
 import { getPresentationUrl } from "@/utils/helper";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
-const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
+const dataset = process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const title = process.env.SANITY_STUDIO_TITLE;
 
 export default defineConfig({

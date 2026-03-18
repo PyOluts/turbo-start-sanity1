@@ -6,20 +6,41 @@ export function PokemonPicker(props: StringInputProps) {
   const { value, onChange } = props;
   const [pokemon, setPokemon] = useState<{name: string, url: string}[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=1500')
-      .then(res => res.json())
-      .then(data => {
-        setPokemon(data.results);
-        setLoading(false);
-      });
+    try {
+      fetch('https://pokeapi.co/api/v2/pokemon?limit=1500')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.results) {
+            setPokemon(data.results);
+          } else {
+            setError(true);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Pokemon fetch error:", err);
+          setError(true);
+          setLoading(false);
+        });
+    } catch (err) {
+      console.error("Unexpected error in PokemonPicker:", err);
+      setError(true);
+      setLoading(false);
+    }
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.currentTarget.value;
     onChange(val ? set(val) : unset());
   };
+
+  if (error) {
+    // If the PokeAPI fetch fails, gracefully return a standard Sanity string input
+    return props.renderDefault(props);
+  }
 
   return (
     <Stack space={3}>
