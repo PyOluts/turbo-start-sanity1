@@ -631,6 +631,7 @@ export type Blog = {
       _key: string;
     } & AuthorReference
   >;
+  pokemon?: string;
   publishedAt?: string;
   image: {
     asset?: SanityImageAssetReference;
@@ -2347,6 +2348,7 @@ export type QueryBlogSlugPageDataResult = {
       } | null;
     } | null;
   } | null;
+  pokemon?: string;
   publishedAt?: string;
   image: {
     id: string | null;

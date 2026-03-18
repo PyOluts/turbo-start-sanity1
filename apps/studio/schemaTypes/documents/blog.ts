@@ -9,6 +9,7 @@ import { documentSlugField, imageWithAltField } from "@/schemaTypes/common";
 import { GROUP, GROUPS } from "@/utils/constant";
 import { ogFields } from "@/utils/og-fields";
 import { seoFields } from "@/utils/seo-fields";
+import { PokemonPicker } from "@/components/PokemonPicker";
 
 export const blog = defineType({
   name: "blog",
@@ -81,6 +82,16 @@ export const blog = defineType({
         Rule.unique(),
       ],
       group: GROUP.MAIN_CONTENT,
+    }),
+    defineField({
+      name: "pokemon",
+      type: "string",
+      title: "Related Pokemon",
+      description: "Select a Pokemon related to this post",
+      group: GROUP.MAIN_CONTENT,
+      components: {
+        input: PokemonPicker,
+      },
     }),
     defineField({
       name: "publishedAt",

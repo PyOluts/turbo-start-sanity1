@@ -4275,6 +4275,13 @@
         },
         "optional": false
       },
+      "pokemon": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "publishedAt": {
         "type": "objectAttribute",
         "value": {
